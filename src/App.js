@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useReducer} from "react";
+import Cart from "./components/Cart";
+import Products from "./components/Products";
+import { appReducer } from './reducers/appReducer';
+
+const styles = {
+  display: 'flex',
+  width: '80vw',
+  margin: '0 auto'
+}
+
 
 function App() {
+
+  const [state, dispatch] = useReducer(appReducer, {
+    products: [],
+    cart: []
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div style={{height: '40px', backgroundColor: '#444', color: '#efefef', textAlign: 'center', lineHeight: '40px'}}>CART LOGIC</div>
+      <div style={styles}>
+        <Products state={state} dispatch={dispatch}/>
+        <Cart state={state} dispatch={dispatch}/>
+      </div>
+    </>
   );
 }
 
